@@ -86,10 +86,10 @@ def draw():
     enemic2.draw()
     enemic3.draw()
 
-    screen.draw.text("Puntuació: " + str(puntuacio), left=0, top=0, color=(0, 0, 0), fontsize=25)
+    screen.draw.text("Puntuació: " + str(puntuacio), left=5, top=5, color=(0, 0, 0), fontsize=25, fontname="gloria-hallelujah")
 
     if game_over:
-        screen.draw.text("GAME OVER", centerx=WIDTH/2, centery=HEIGHT/2, color=(0, 0, 0), fontsize=80)
+        screen.draw.text("GAME OVER", centerx=WIDTH/2, centery=HEIGHT/2, color=(0, 0, 0), fontsize=80, fontname="gloria-hallelujah")
 
 def update():
     global puntuacio, game_over
