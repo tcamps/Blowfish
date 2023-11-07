@@ -125,7 +125,8 @@ def draw():
     jugador.draw()
     menjar.draw()
 
-    screen.draw.text("Puntuació: " + str(puntuacio), left=5, top=5, color=(0, 0, 0), fontsize=25, fontname="gloria-hallelujah")
+    screen.draw.text("Puntuació: " + str(puntuacio), left=5, top=5, color=(0, 0, 0),
+        fontsize=25, fontname="gloria-hallelujah")
 
 ```
 
@@ -223,7 +224,8 @@ def draw():
     ...
 
     if game_over:
-        screen.draw.text("GAME OVER", centerx=WIDTH/2, centery=HEIGHT/2, color=(0, 0, 0), fontsize=80, fontname="gloria-hallelujah")
+        screen.draw.text("GAME OVER", centerx=WIDTH/2, centery=HEIGHT/2, color=(0, 0, 0),
+            fontsize=80, fontname="gloria-hallelujah")
 
 ```
 
