@@ -40,7 +40,6 @@ Les constants ***WIDTH***, ***HEIGHT*** i ***TITLE*** serveixen per definir ampl
 Les funcions ***draw()*** i ***update()*** són molt importants. Aquestes dues funcions són cridades per la llibreria 60 cops per segons (FPS - *Frame Per Second*). La funció *draw()* serà utilitzada per netejar la pantalla i tornar a dibuixar els sprites en cada frame. La funció *update()* s'encarregarà de moure els elements, comprovar les col·lissions i els events de teclat i/o ratolí.
 
 ## Sprite del jugador
-
 En la part principal del codi (abans de les funcions *draw()* i *update()*), creem un primer sprite, el del jugador i el col·loquem a la posició inicial.
 
 ```
@@ -50,7 +49,7 @@ jugador.centerx = WIDTH / 2
 jugador.centery = HEIGHT / 2
 ```
 
-Crearem una nova funció per moure el jugador:
+Crearem una nova funció per moure el jugador dins els límits de la pantalla:
 ```
 def mou_jugador():
     if keyboard.LEFT and jugador.left > 0:
@@ -69,3 +68,132 @@ A la funció *update()* cridem aquesta funció per moure el jugador, si escau, e
 def update():
     mou_jugador()
 ```
+I a la funcio *draw()* pintell la pantalla de blanc i el jugador en cada frame.
+```
+def draw():
+        # Pintem tota la pantalla de blanc (RGB)
+        screen.fill((255, 255, 255))
+
+        # Dibuixem el jugador
+        jugador.draw()
+```
+
+## Sprite del menjar
+Creem un segon sprite que serà el peix a menjar pel jugador.
+```
+menjar = Actor('menjar')
+```
+
+Per posicionar el menjar, crearem una funció que serà cridada cada cop que el jugador col·lisioni amb el sprite en una posició aleatòria. Just després de crear la funció la cridem per col·local el menjar el primer cop.
+
+```
+def posicio_menjar():
+    menjar.centerx = random.randint(0+round(menjar.width/2), WIDTH-round(menjar.width/2))
+    menjar.centery = random.randint(0+round(menjar.height/2), HEIGHT-round(menjar.height/2))
+
+posicio_menjar()
+```
+Dibuixem el menjar en cada frame a la funció *draw()*.
+```
+menjar.draw()
+```
+
+En la funció *update()* comprovem si el jugador i el menjar al col·lisionat. En cas afirmatiu cal augmentar la puntuació i tornar a posicions el menjar, per la qual tasca tenim la funció *posicion_menjar()*.
+```
+def update():
+    global puntuacio
+
+    # Col·lisions
+    if jugador.colliderect(menjar):
+        puntuació += 1
+        posicio_menjar()
+
+    mou_jugador()
+```
+La variable **puntuacio** és una variable global. L'hem de definir com a global en la funció *udpate()* perquè hi pugui accedir.
+
+Per mostrar la puntuació actualitzada per pantalla, actualitzem el text en cada frame en la funció *draw()*.
+```
+def draw():
+    screen.fill((255, 255, 255))
+
+    jugador.draw()
+    menjar.draw()
+
+    screen.draw.text("Puntuació: " + str(puntuacio), left=5, top=5, color=(0, 0, 0), fontsize=25, fontname="gloria-hallelujah")
+
+```
+
+## Sprites dels enemics
+A la part principal del codi (abans de les funcions *draw()* i *update()*), creem i posicionem els sprites dels tres enemics.
+
+```
+enemic1 = Actor('enemic')
+enemic1.top = 0
+enemic1.centerx = WIDTH / 2
+enemic1.velx = 5
+enemic1.vely = 5
+
+enemic2 = Actor('enemic')
+enemic2.left = 0
+enemic2.centery = HEIGHT / 2
+enemic2.velx = 5
+enemic2.vely = 5
+
+enemic3 = Actor('enemic')
+enemic3.right = WIDTH
+enemic3.centery = HEIGHT / 2
+enemic3.velx = 5
+enemic3.vely = 5
+```
+
+Els enemics es mouran automàticament i en diagonal. Necessitem la velocitat de l'eix x (*velx*) i y (*vely*) de cada enemic.
+
+Crearem un funció per moure els tres enèmics dins els límits de la pantalla.
+```
+def mou_enemics():
+    # Enemic 1
+    if enemic1.left < 0 or enemic1.right > WIDTH:
+        enemic1.velx *= -1
+    if enemic1.top < 0 or enemic1.bottom > HEIGHT:
+        enemic1.vely *= -1
+    enemic1.centerx += enemic1.velx
+    enemic1.centery += enemic1.vely
+
+    # Enemic 2
+    if enemic2.left < 0 or enemic2.right > WIDTH:
+        enemic2.velx *= -1
+    if enemic2.top < 0 or enemic2.bottom > HEIGHT:
+        enemic2.vely *= -1
+    enemic2.centerx += enemic2.velx
+    enemic2.centery += enemic2.vely
+
+    # Enemic 3
+    if enemic3.left < 0 or enemic3.right > WIDTH:
+        enemic3.velx *= -1
+    if enemic3.top < 0 or enemic3.bottom > HEIGHT:
+        enemic3.vely *= -1
+    enemic3.centerx += enemic3.velx
+    enemic3.centery += enemic3.vely
+```
+
+Quan un enemic col·lisiona amb una de les quatre vores s'inverteix la seva velocitat multiplicant per -1, *velx* per les vores laterals o *vely* per les vores superios i inferiors.
+
+Dibuixem els tres enemics a cada frame en la funció *draw()*.
+```
+enemic1.draw()
+enemic2.draw()
+enemic3.draw()
+```
+
+A la funció *update()*, comprovem si el jugador ha col·lisionat amb algun enemic i movem els enemics fent ús de la funció creada.
+```
+    ...
+    if jugador.colliderect(enemic1) or jugador.colliderect(enemic2) or jugador.colliderect(enemic3):
+        game_over = True
+
+    ...
+    mou_enemics()
+    ...
+```
+
