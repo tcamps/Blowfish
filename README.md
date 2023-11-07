@@ -95,7 +95,12 @@ posicio_menjar()
 ```
 Dibuixem el menjar en cada frame a la funció *draw()*.
 ```
-menjar.draw()
+def draw():
+    ...
+
+    menjar.draw()
+
+    ...
 ```
 
 En la funció *update()* comprovem si el jugador i el menjar al col·lisionat. En cas afirmatiu cal augmentar la puntuació i tornar a posicions el menjar, per la qual tasca tenim la funció *posicion_menjar()*.
@@ -110,7 +115,7 @@ def update():
 
     mou_jugador()
 ```
-La variable **puntuacio** és una variable global. L'hem de definir com a global en la funció *udpate()* perquè hi pugui accedir.
+La variable ***puntuacio*** és una variable global. L'hem de definir com a global en la funció *udpate()* perquè hi pugui accedir.
 
 Per mostrar la puntuació actualitzada per pantalla, actualitzem el text en cada frame en la funció *draw()*.
 ```
@@ -128,6 +133,8 @@ def draw():
 A la part principal del codi (abans de les funcions *draw()* i *update()*), creem i posicionem els sprites dels tres enemics.
 
 ```
+...
+
 enemic1 = Actor('enemic')
 enemic1.top = 0
 enemic1.centerx = WIDTH / 2
@@ -145,6 +152,8 @@ enemic3.right = WIDTH
 enemic3.centery = HEIGHT / 2
 enemic3.velx = 5
 enemic3.vely = 5
+
+...
 ```
 
 Els enemics es mouran automàticament i en diagonal. Necessitem la velocitat de l'eix x (*velx*) i y (*vely*) de cada enemic.
@@ -181,19 +190,52 @@ Quan un enemic col·lisiona amb una de les quatre vores s'inverteix la seva velo
 
 Dibuixem els tres enemics a cada frame en la funció *draw()*.
 ```
-enemic1.draw()
-enemic2.draw()
-enemic3.draw()
+def draw():
+    ...
+
+    enemic1.draw()
+    enemic2.draw()
+    enemic3.draw()
+
+    ...
 ```
 
 A la funció *update()*, comprovem si el jugador ha col·lisionat amb algun enemic i movem els enemics fent ús de la funció creada.
 ```
-    ...
+def udpate():
+    global puntuacio, game_over
+
     if jugador.colliderect(enemic1) or jugador.colliderect(enemic2) or jugador.colliderect(enemic3):
         game_over = True
 
     ...
+
     mou_enemics()
+
     ...
 ```
+***game_over*** torna a ser una variable global que necessitem utilitzar dins la funció *update()*.
+
+## Sprites dels enemics
+En produir-se el final del joc (Game Over) la pantalla es seguirà actualitzant a 60 FPS. En la funció draw dibuixarem el text de Game Over.
+```
+def draw():
+    ...
+
+    if game_over:
+        screen.draw.text("GAME OVER", centerx=WIDTH/2, centery=HEIGHT/2, color=(0, 0, 0), fontsize=80, fontname="gloria-hallelujah")
+
+```
+
+En la funció *update()* posarem un return al principi per provocar que no executi la resta d'ordres de la funció i no modifique les posicions dels sprites ni comprovi col·lisions.
+```
+def update():
+    global puntuacio, game_over
+
+    if game_over:
+        return
+
+    ...
+```
+
 
