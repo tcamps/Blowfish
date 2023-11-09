@@ -2,7 +2,8 @@
 
 Joc desenvolupat amb Python i la llibreria PyGame Zero.
 
-Imatges dels sprites: https://kenney.nl/assets/fish-pack
+Imatges dels sprites: [https://kenney.nl/assets/fish-pack]
+Sons del joc: (Kenney - Music Jingles)[https://kenney.nl/assets/music-jingles]
 
 ## Configuració bàsica de la pantalla de joc
 
