@@ -2,8 +2,9 @@
 
 Joc desenvolupat amb Python i la llibreria PyGame Zero.
 
-Imatges dels sprites: [https://kenney.nl/assets/fish-pack]
-Sons del joc: (Kenney - Music Jingles)[https://kenney.nl/assets/music-jingles]
+Imatges dels sprites: [Kenney - Fish Pack](https://kenney.nl/assets/fish-pack)
+Sons del joc: [Kenney - Music Jingles](https://kenney.nl/assets/music-jingles)
+Música del joc: [Incompetech - Island Meet and Greet](https://incompetech.com/music/royalty-free/music.html)
 
 ## Configuració bàsica de la pantalla de joc
 
