@@ -20,10 +20,10 @@ El nostre projecte s'ha de trobar dins una carpeta amb la següent estructura:
 
 Els noms dels arxius no han de tindre majúscules, espais, accents ni caràcters especials.
 
-* sounds. Carpeta amb els diferents sons del joc. Han de tindre format *.ogg.
-* music. Carpeta amb les músiques el joc. Han de tindre format *.ogg.
-* fonts. Carpeta amb les diferents fonts dels textos del joc. Han de tindre format *.ttf.
-* images. Carpeta amb totes les imatges del nostre jocs: imatges de fons i dels sprites. Han de tindre format *.jpg o *.png.
+* ***sounds***. Carpeta amb els diferents sons del joc. Han de tindre format *.ogg.
+* ***music***. Carpeta amb les músiques el joc. Han de tindre format *.ogg.
+* ***fonts***. Carpeta amb les diferents fonts dels textos del joc. Han de tindre format *.ttf.
+* ***images***. Carpeta amb totes les imatges del nostre jocs: imatges de fons i dels sprites. Han de tindre format *.jpg o *.png.
 
 ## Configuració bàsica de la pantalla de joc
 
