@@ -8,6 +8,8 @@ Sons del joc: [Kenney - Music Jingles](https://kenney.nl/assets/music-jingles)
 
 Música del joc: [Incompetech - Island Meet and Greet](https://incompetech.com/music/royalty-free/music.html)
 
+Fonts dels textos: [Google Fonts - Gloria Hallelujah](https://fonts.google.com/specimen/Gloria+Hallelujah?query=gloria)
+
 ## Configuració bàsica de la pantalla de joc
 
 El següent codi crearà una pantalla de joc en blanc.
