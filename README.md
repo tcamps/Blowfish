@@ -12,6 +12,19 @@ Música del joc: [Incompetech - Island Meet and Greet](https://incompetech.com/m
 
 Fonts dels textos: [Google Fonts - Gloria Hallelujah](https://fonts.google.com/specimen/Gloria+Hallelujah?query=gloria)
 
+## Estructura del projecte i format dels fitxers
+
+El nostre projecte s'ha de trobar dins una carpeta amb la següent estructura:
+
+![Esctructura del projecte](estructura_projecte_blowfish.png)
+
+Els noms dels arxius no han de tindre majúscules, espais, accents ni caràcters especials.
+
+* sounds. Carpeta amb els diferents sons del joc. Han de tindre format *.ogg.
+* music. Carpeta amb les músiques el joc. Han de tindre format *.ogg.
+* fonts. Carpeta amb les diferents fonts dels textos del joc. Han de tindre format *.ttf.
+* images. Carpeta amb totes les imatges del nostre jocs: imatges de fons i dels sprites. Han de tindre format *.jpg o *.png.
+
 ## Configuració bàsica de la pantalla de joc
 
 El següent codi crearà una pantalla de joc en blanc.
@@ -248,4 +261,49 @@ def update():
     ...
 ```
 
+## Música del joc
+El joc tindrà una sola música que es reproduirà en bucle des de l'inici del joc fins a produir-se el Game Over.
+
+A la part principal, abans de qualsevol funció, posem en marxa la música.
+```
+...
+
+music.play("island_meet_greet")
+
+def draw():
+    ...
+```
+
+I al produir-se el Game Over, l'aturem.
+```
+...
+
+if jugador.colliderect(enemic1) or jugador.colliderect(enemic2) or jugador.colliderect(enemic3):
+    game_over = True
+    music.stop()
+
+...
+```
+
+## Sons del joc
+En aquesta primera versió tindrem dos sons: quan el jugador mengi un peix petit i al produir-se el Game Over
+```
+...
+
+if jugador.colliderect(menjar):
+    puntuacio += 1
+    sounds.menja_peix.play()
+    ...
+```
+```
+...
+
+if jugador.colliderect(enemic1) or jugador.colliderect(enemic2) or jugador.colliderect(enemic3):
+    game_over = True
+    sounds.game_over.play()
+    music.stop()
+
+....
+```
+Els sons no s'aturen amb *stop()*. Són sons curts que es reprodueixen un cop cada vegada que executem el *play()* fins el final.
 
